@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwjugdoisnlfs"]
+
+[sub_resource type="Gradient" id="2"]
+offsets = PackedFloat32Array(0, 0.989011)
+colors = PackedColorArray(0.0319561, 0.49402, 0.807617, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="3"]
+gradient = SubResource("2")
+
+[sub_resource type="Curve" id="4"]
+_data = [Vector2(0.00117925, 1), 0.0, 0.916631, 0, 0, Vector2(1, 0.738267), -2.04092, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="5"]
+curve = SubResource("4")
+
+[sub_resource type="ParticleProcessMaterial" id="6"]
+emission_shape = 1
+emission_sphere_radius = 0.25
+direction = Vector3(0, 0, 1)
+spread = 0.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("5")
+color_ramp = SubResource("3")
+
+[sub_resource type="StandardMaterial3D" id="7"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+
+[sub_resource type="SphereMesh" id="8"]
+material = SubResource("7")
+radius = 0.1
+height = 0.2
+
+[node name="ThrustRight" type="GPUParticles3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.941484, -0.156281, 6.02053)
+amount = 50
+lifetime = 0.1
+process_material = SubResource("6")
+draw_pass_1 = SubResource("8")

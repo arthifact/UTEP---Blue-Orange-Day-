@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cck0ednmaam77"]
+
+[ext_resource type="PackedScene" uid="uid://io3xcovj5evy" path="res://assets/SpaceShips/Striker.gltf" id="1_fkaei"]
+[ext_resource type="Texture2D" uid="uid://caj13osa8gith" path="res://assets/SpaceShips/Striker_Striker_Orange.png" id="2_b88rf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u71ot"]
+albedo_texture = ExtResource("2_b88rf")
+emission = Color(0.465649, 0.463429, 0.3447, 1)
+
+[node name="Striker2" instance=ExtResource("1_fkaei")]
+
+[node name="Striker" parent="." index="0"]
+material_override = SubResource("StandardMaterial3D_u71ot")

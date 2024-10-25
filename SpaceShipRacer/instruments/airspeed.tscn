@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d38f66notlgoq"]
+
+[ext_resource type="Script" path="res://instruments/airspeed.gd" id="1_7snlw"]
+
+[node name="Airspeed" type="Label"]
+custom_minimum_size = Vector2(500, 500)
+offset_right = 500.0
+offset_bottom = 500.0
+text = "Speed
+"
+script = ExtResource("1_7snlw")

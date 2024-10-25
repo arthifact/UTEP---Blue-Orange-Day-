@@ -1,0 +1,62 @@
+[gd_scene load_steps=10 format=3 uid="uid://bblpp4uwyhxyx"]
+
+[ext_resource type="Texture2D" uid="uid://b14mltgipglul" path="res://assets/styled_sky.hdr" id="1_vohoe"]
+[ext_resource type="PackedScene" uid="uid://cnbeqfdyytsyw" path="res://Player/Player.tscn" id="2_ssaru"]
+[ext_resource type="Script" path="res://Player/camera_3d.gd" id="3_nsq05"]
+[ext_resource type="PackedScene" uid="uid://ywngbksr0edx" path="res://instruments/instrument_panel.tscn" id="4_0r6as"]
+[ext_resource type="Texture2D" uid="uid://k6o1vvfi8q7l" path="res://assets/prototype_textures/Green/texture_09.png" id="5_nbjy7"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_76liy"]
+panorama = ExtResource("1_vohoe")
+
+[sub_resource type="Sky" id="Sky_l5epd"]
+sky_material = SubResource("PanoramaSkyMaterial_76liy")
+
+[sub_resource type="Environment" id="Environment_k8bss"]
+background_mode = 2
+sky = SubResource("Sky_l5epd")
+ambient_light_color = Color(0.501961, 0.501961, 0.501961, 1)
+ambient_light_sky_contribution = 0.3
+ambient_light_energy = 3.0
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_exposure = 1.25
+tonemap_white = 6.0
+ssr_enabled = true
+ssao_enabled = true
+ssao_intensity = 1.67
+glow_levels/1 = 1.0
+glow_blend_mode = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p5dka"]
+albedo_texture = ExtResource("5_nbjy7")
+uv1_scale = Vector3(100, 100, 100)
+
+[node name="World" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_energy = 2.0
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_k8bss")
+
+[node name="Player" parent="." instance=ExtResource("2_ssaru")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00305, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.00305, 7.18286)
+script = ExtResource("3_nsq05")
+target_path = NodePath("../Player")
+offset = Vector3(0, 6, 12)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="InstrumentPanel" parent="CanvasLayer" node_paths=PackedStringArray("plane") instance=ExtResource("4_0r6as")]
+plane = NodePath("../../Player")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(10000, 1, 10000)
+material = SubResource("StandardMaterial3D_p5dka")
